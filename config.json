@@ -1,0 +1,10 @@
+{
+  "user": "root",
+  "password": "toor",
+  "directory_local": "/srv/http/Projeto",
+  "server": "localhost",
+  "port": "1337",
+  "ignore_directory": [".git"],
+  "ignore_file": [],
+  "directory_serve": "/home/remoto/public"
+}

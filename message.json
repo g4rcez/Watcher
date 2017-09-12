@@ -1,0 +1,16 @@
+{
+  "pt-br": {
+    "dirs": "Diretórios encontrados: ",
+    "files": "Arquivos encontrados: ",
+    "thefile": "O arquivo ",
+    "compromised": "não está integro",
+    "rescue": "foi recuperado de "
+  },
+  "en": {
+    "dirs": "Found directories ",
+    "files": "Found files ",
+    "thefile": "The file",
+    "compromised": "is not integrated",
+    "rescue": "was recovered from"
+  }
+}
