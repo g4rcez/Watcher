@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 import hashlib
-from src.CredentialsAndDirectory import CredentialsAndDirectory
+from src.Message import Message
 from src.Connection import Connection
+from src.CredentialsAndDirectory import CredentialsAndDirectory
 
 
 def banner():
     print("""
-██╗    ██╗ █████╗ ████████╗ ██████╗██╗  ██╗███████╗██████╗ 
+██╗    ██╗ █████╗ ████████╗ ██████╗██╗  ██╗███████╗██████╗
 ██║    ██║██╔══██╗╚══██╔══╝██╔════╝██║  ██║██╔════╝██╔══██╗
 ██║ █╗ ██║███████║   ██║   ██║     ███████║█████╗  ██████╔╝
 ██║███╗██║██╔══██║   ██║   ██║     ██╔══██║██╔══╝  ██╔══██╗
@@ -16,17 +17,18 @@ def banner():
 
 
 banner()
+notifications = Message(open('message.json', 'r').read())
 
 manipulate = CredentialsAndDirectory()
-if not manipulate.status_configuration():
-    exit()
+# if not manipulate.status_configuration():
+#     exit()
 
 manipulate.set_all_directories()
 manipulate.set_all_files()
 
-print(len(manipulate.get_all_directories()))
-print(len(manipulate.get_all_files()))
-print()
+print(notifications.get_message('dirs') + str(len(manipulate.get_all_directories())))
+print(notifications.get_message('files') + str(len(manipulate.get_all_files())))
+
 
 connection = Connection(
     manipulate.get_user(), manipulate.get_password(),
@@ -41,6 +43,6 @@ for file in manipulate.get_all_files():
     hash_server = connection.command(signal).decode().replace('\n', '')
     if hash_server != local_hash:
         connection.put(file, file_server)
-        print('[!] ' + file_server + ' ' + file)
+        print('[!] ' + notifications.get_message('thefile') + file_server + notifications.get_message('rescue') + file)
 
 connection.close()
